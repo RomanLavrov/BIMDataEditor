@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using BIMDataEditor.Data;
 using BIMDataEditor.Models;
 using BIMDataEditor.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace BIMDataEditor
 {
@@ -43,6 +44,12 @@ namespace BIMDataEditor
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<DeveloperID>(mySecrets =>
+            {
+                mySecrets.forgeClientId = Configuration["forgeClientID"];
+                mySecrets.forgeClientSecret = Configuration["forgeClientSecret"];
+            });
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -59,7 +66,7 @@ namespace BIMDataEditor
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

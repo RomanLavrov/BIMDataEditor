@@ -1,0 +1,18 @@
+
+@{
+
+}
+
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload" class="navbar-right">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+        <input class="mdl-textfield__input" placeholder="File" type="text" id="uploadFile" readonly />
+        <div >
+            <i class="btn-primary">attach_file</i><input type="file" name="file" id="uploadBtn">
+        </div>
+    </div>
+    <label class="btn-success">
+        Upload
+        <input type="submit" value="Upload" name="Submit" id="Submit" style="display: none;" />
+    </label>
+</form>
+
