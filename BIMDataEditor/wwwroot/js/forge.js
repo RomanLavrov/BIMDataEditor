@@ -1,6 +1,6 @@
 ﻿var viewerApp;
 var model;
-
+document.getElementById("Submit").submit();
 function showModel(urn) {
     var options = {
         env: 'AutodeskProduction',

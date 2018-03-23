@@ -36,9 +36,9 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><div class="mdl-layout__header-row">@Html.Partial("Upload")</div></li>
-
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
+                    <li><div style="margin-top: 7px; margin-left: 50px">@Html.Partial("Upload")</div></li>
+                   
                 </ul>
                     @await Html.PartialAsync("_LoginPartial")
             </div>

@@ -9,12 +9,23 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+    /* Set widths on the form inputs since otherwise they're 100% wide */
+    input, select, textarea {
+    max-width: 100px;
 }
 
 /* Carousel */

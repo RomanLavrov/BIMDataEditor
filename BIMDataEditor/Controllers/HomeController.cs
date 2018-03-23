@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Autodesk.Forge;
 using System.IO;
+using System.Net;
 using Autodesk.Forge.Model;
 using Microsoft.Extensions.Configuration;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Options;
 
 namespace BIMDataEditor.Controllers
@@ -26,29 +28,45 @@ namespace BIMDataEditor.Controllers
         {
             if (URN == null)
             {
-                URN = "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6Zm9yZ2VhcHA2OTYyNTVmYTc1ZjA0ZWU3YjRjYjA0YjkyODRjOGU0NS9UYWJsZS5mYng=";
+               
+                //URN = "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6Zm9yZ2VhcHA2OTYyNTVmYTc1ZjA0ZWU3YjRjYjA0YjkyODRjOGU0NS9UYWJsZS5mYng=";
             }
-
+           
             return View((object)URN);
         }
 
         [HttpPost("Home/Upload")]
         public async Task<IActionResult> Post(IFormFile file)
         {
+            string fileName = string.Empty;
             //Create Bucket Name
             string bucketKey = "forgeapp" + Guid.NewGuid().ToString("N").ToLower();
 
-           
-            if (file == null || file.Length == 0) return Content("File not found");
+            string tempFilePath = Path.GetTempFileName();
+            if (file == null || file.Length == 0)
+            {
+                byte[] data;
+                string preloadURL = "https://forgefiles.blob.core.windows.net/forgefiles/CC303_170830_16035_4000ff%20Werkplan_V006.nwc";
+
+                using (WebClient client = new WebClient())
+                {
+                    data = client.DownloadData(preloadURL);
+                    string path = Environment.CurrentDirectory;
+                    //System.IO.File.WriteAllBytes(path, data);
+                    Stream stream = new MemoryStream();
+                    stream.Write(data, 0, data.Length);
+                   FormFile f = new FormFile(stream, 0, data.Length, "test", "FireDetectorsForge.nwc");
+
+                    file = f;
+                }
+                //return Content("File not found");
+            }
 
             long size = file.Length;
-            string fileName = file.FileName;
-
-            var tempFilePath = Path.GetTempFileName();
+            fileName = file.FileName;
 
             if (file.Length > 0)
             {
-                
                 using (var stream = new FileStream(tempFilePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
@@ -84,8 +102,6 @@ namespace BIMDataEditor.Controllers
             }
 
             //Translate File
-
-
             string objectIdBase64 = ToBase64(newObject.objectId);
             List<JobPayloadItem> postTranslationOutput = new List<JobPayloadItem>()
             {
@@ -106,7 +122,6 @@ namespace BIMDataEditor.Controllers
             dynamic translation = await derivativeApi.TranslateAsync(postTranslation);
 
             //Translation finish check
-
             int progress = 0;
             do
             {
