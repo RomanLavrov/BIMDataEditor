@@ -1,8 +1,7 @@
-﻿// Write your Javascript code.
-alert("Hello");
-var element = document.getElementById("Submit");
-if (typeof (element) != 'undefined' && element != null) {
-    element.color = red;
-    alert("ElementExists");
-
+﻿
+function runUpload() {
+    var UploadButton = document.getElementById("Upload");
+    var SelectedFile = document.getElementById("FileName");
+        SelectedFile.value = 'default';
+        UploadButton.click();
 }

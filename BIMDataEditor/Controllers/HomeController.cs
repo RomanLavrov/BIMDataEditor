@@ -26,12 +26,6 @@ namespace BIMDataEditor.Controllers
 
         public IActionResult Index(string URN)
         {
-            if (URN == null)
-            {
-               
-                //URN = "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6Zm9yZ2VhcHA2OTYyNTVmYTc1ZjA0ZWU3YjRjYjA0YjkyODRjOGU0NS9UYWJsZS5mYng=";
-            }
-           
             return View((object)URN);
         }
 
@@ -51,18 +45,15 @@ namespace BIMDataEditor.Controllers
                 using (WebClient client = new WebClient())
                 {
                     data = client.DownloadData(preloadURL);
-                    string path = Environment.CurrentDirectory;
-                    //System.IO.File.WriteAllBytes(path, data);
                     Stream stream = new MemoryStream();
                     stream.Write(data, 0, data.Length);
-                   FormFile f = new FormFile(stream, 0, data.Length, "test", "FireDetectorsForge.nwc");
+                    FormFile f = new FormFile(stream, 0, data.Length, "test", "FireDetectorsForge.nwc");
 
                     file = f;
                 }
                 //return Content("File not found");
             }
 
-            long size = file.Length;
             fileName = file.FileName;
 
             if (file.Length > 0)
@@ -75,7 +66,7 @@ namespace BIMDataEditor.Controllers
 
             //Get Token
             TwoLeggedApi oauthApi = new TwoLeggedApi();
-            
+
             dynamic bearer = await oauthApi.AuthenticateAsync(
                 "3uIC6EV2VLsCQSe4Kk2BWSaF5i7Y3nAu",
                 "Uk5sTWS2Fv0HW12L",
@@ -83,7 +74,7 @@ namespace BIMDataEditor.Controllers
                 //_developer.forgeClientSecret,
                 "client_credentials",
                 new Scope[] { Scope.BucketCreate, Scope.DataCreate, Scope.DataWrite, Scope.DataRead });
-           
+
             //Create Forge Bucket
             PostBucketsPayload postBucket = new PostBucketsPayload(bucketKey, null, PostBucketsPayload.PolicyKeyEnum.Transient);
             BucketsApi bucketApi = new BucketsApi();
@@ -141,8 +132,8 @@ namespace BIMDataEditor.Controllers
 
             //Delete temp file
             System.IO.File.Delete(tempFilePath);
-           
-            return RedirectToAction("Index", new {URN = (object) objectIdBase64});
+
+            return RedirectToAction("Index", new { URN = (object)objectIdBase64 });
         }
 
         public string ToBase64(string input)
@@ -170,6 +161,6 @@ namespace BIMDataEditor.Controllers
             return View();
         }
 
-       
+
     }
 }

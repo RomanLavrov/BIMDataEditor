@@ -10,6 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Home\loadingAnimation.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\images\loadingAnimation.gif" />
+    <Content Include="wwwroot\loadingAnimation.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\AttributeExtension.js" />
+    <Content Include="wwwroot\js\AttributeApplication.js" />
+    <Content Include="wwwroot\js\AttributeExtension.js" />
     <Content Include="wwwroot\js\forge.js" />
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +48,19 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

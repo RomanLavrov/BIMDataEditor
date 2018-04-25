@@ -4,38 +4,30 @@
 }
 
 <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload" style="width: 600px">
-    @*<div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
-            <input class="mdl-textfield__input" placeholder="File" type="text" id="uploadFile" readonly />
-            <div >
-                <i class="btn-primary">attach_file</i><input type="file" name="file" id="uploadBtn">
-            </div>
-        </div>
-        <label class="btn-success">
-            Upload
-            <input type="submit" value="Upload" name="Submit" id="Submit" style="display: none;" />
-        </label>*@
+    <div class="input-group" style="float: left; position: relative; width:400px">
 
-
-    <div class="input-group" style="position: relative">
-
-        <span class="input-group-btn">
-            <span class="btn btn-default btn-file">
-                Browse <input type="file" id="package-file-select" name="file">
-
+        <label class="input-group-btn" id="Test">
+            <span class="btn btn-primary">
+                Browse <input type="file" id="package-file-select" name="file" style="display: none" value="" onchange="myFunction(this.value);"/>
             </span>
-        </span>
+        </label>
+        <input class="form-control" id="FileName" type="text" placeholder="No file selected" readonly />
+    </div>
 
-        <input class="form-control" style="width:150px" type="text" placeholder="No file selected" readonly />
-
-        <label class="btn btn-success" style="position: relative" id="Upload">
+    <div >
+        <label class="btn btn-success" style="position: relative; margin-left: 10px" id="Upload">
             Upload
             <input type="submit" value="Upload" name="Submit" id="Submit" style="display: none;" />
         </label>
-        <br>
-
     </div>
-    <br />
-
-
+    
+    <script >
+       function myFunction(val) {
+           var textField = document.getElementById("FileName");
+           var label = val.replace(/\\/g, '/').replace(/.*\//, '');
+           textField.placeholder = label;
+       }
+        
+    </script>
 </form>
 
