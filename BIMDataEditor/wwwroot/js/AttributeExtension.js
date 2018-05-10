@@ -64,7 +64,7 @@ function httpGet(selectedId) {
     var propName = document.getElementById("propName");
     propName.innerHTML = objProperties.data.collection[0].name;
     var propHidden = document.getElementById("propHidden");
-    propHidden.innerHTML = objProperties.data.collection[0].properties.Item.Hidden;
+    propHidden.innerHTML = objProperties.data.collection[0].properties.Item.Hidden ;
     var propLayer = document.getElementById("propLayer");
     propLayer.innerHTML = objProperties.data.collection[0].properties.Item.Layer;
     var propMaterial = document.getElementById("propMaterial");
