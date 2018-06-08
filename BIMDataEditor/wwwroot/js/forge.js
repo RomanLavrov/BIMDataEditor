@@ -23,7 +23,7 @@ function showModel(urn) {
     var documentId = 'urn:' + urn;
     
     console.log("BEAREAR: " + getAccessToken());
-
+    console.log("Viewing " + window.Autodesk);
     window.Autodesk.Viewing.Initializer(options, function onInitialized() {
 
         viewerApp = new window.Autodesk.Viewing.ViewingApplication('MyViewerDiv');

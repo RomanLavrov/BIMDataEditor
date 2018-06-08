@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Autodesk.Forge;
+using Autodesk.Forge.Model;
 using Microsoft.AspNetCore.Http;
-using Autodesk.Forge;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using Autodesk.Forge.Model;
-using Microsoft.Extensions.Configuration;
 using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Http.Internal;
-using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 
 namespace BIMDataEditor.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly Data.DeveloperID _developer;
+        //private readonly Data.DeveloperID _developer;
 
-        public HomeController(IOptions<Data.DeveloperID> optionsAccessor)
-        {
-            _developer = optionsAccessor.Value;
-        }
+        //public HomeController(IOptions<Data.DeveloperID> optionsAccessor)
+        //{
+        //    _developer = optionsAccessor.Value;
+        //}
 
         public IActionResult Index(string URN)
         {
@@ -160,7 +157,5 @@ namespace BIMDataEditor.Controllers
         {
             return View();
         }
-
-
     }
 }
